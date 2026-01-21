@@ -6,126 +6,166 @@
 <title>DP + Graph 200 Problems Tracker</title>
 
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-
-body {
-  font-family: 'Segoe UI', sans-serif;
-  background: linear-gradient(135deg, #000000, #111111);
-  color: #e5e7eb;
-  padding: 20px;
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  background:#0a0a0a;
+  color:#a1a1a1;
+  padding:40px 20px;
+  line-height:1.6;
+}
+.container{max-width:1400px;margin:auto}
+header{
+  padding:40px 0 30px;
+  margin-bottom:40px;
+  border-bottom:1px solid #1a1a1a;
+}
+h1{
+  color:#e5e5e5;
+  font-size:2rem;
+  font-weight:600;
+  margin-bottom:25px;
+  letter-spacing:-0.5px;
+}
+.progress-bar{
+  height:6px;
+  background:#1a1a1a;
+  border-radius:3px;
+  overflow:hidden;
+  margin-bottom:12px;
+}
+.progress-fill{
+  height:100%;
+  background:#404040;
+  transition:width 0.3s ease;
+}
+.overall-text{
+  font-size:0.875rem;
+  color:#737373;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:16px;
+  margin-bottom:40px;
+}
+.stat{
+  background:#141414;
+  padding:20px;
+  border-radius:8px;
+  border:1px solid #1a1a1a;
+}
+.stat-value{
+  font-size:1.75rem;
+  color:#e5e5e5;
+  font-weight:600;
+  display:block;
+  margin-bottom:4px;
+}
+.stat-label{
+  font-size:0.813rem;
+  color:#737373;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+.section{
+  background:#141414;
+  border:1px solid #1a1a1a;
+  border-radius:12px;
+  margin-bottom:24px;
+  overflow:hidden;
+}
+.section-header{
+  padding:20px 24px;
+  background:#0f0f0f;
+  border-bottom:1px solid #1a1a1a;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+h2{
+  color:#e5e5e5;
+  font-size:1rem;
+  font-weight:600;
+  letter-spacing:-0.3px;
+}
+.section-meta{
+  display:flex;
+  align-items:center;
+  gap:16px;
+}
+.section-count{
+  font-size:0.813rem;
+  color:#737373;
+}
+.section-progress-bar{
+  width:80px;
+  height:4px;
+  background:#1a1a1a;
+  border-radius:2px;
+  overflow:hidden;
+}
+.section-progress-fill{
+  height:100%;
+  background:#404040;
+  transition:width 0.3s ease;
+}
+.problem-list{
+  padding:16px 24px 24px;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:8px;
+}
+.problem-item{
+  display:flex;
+  align-items:center;
+  padding:10px 12px;
+  background:#0a0a0a;
+  border-radius:6px;
+  border:1px solid transparent;
+  transition:all 0.2s ease;
+}
+.problem-item:hover{
+  background:#141414;
+  border-color:#262626;
+}
+.problem-item.completed{
+  background:#0f1410;
+  border-color:#1a2e1a;
+}
+.problem-item.completed:hover{
+  background:#141a14;
+}
+input[type=checkbox]{
+  width:16px;
+  height:16px;
+  margin-right:12px;
+  cursor:pointer;
+  accent-color:#404040;
+  flex-shrink:0;
+}
+.problem-link{
+  color:#a1a1a1;
+  text-decoration:none;
+  font-size:0.875rem;
+  transition:color 0.2s ease;
+}
+.problem-link:hover{
+  color:#e5e5e5;
+}
+.problem-item.completed .problem-link{
+  color:#737373;
+}
+.problem-item.completed .problem-link:hover{
+  color:#a1a1a1;
 }
 
-.container { max-width: 1200px; margin: auto; }
-
-header {
-  text-align: center;
-  padding: 20px;
-  background: rgba(0,0,0,0.85);
-  border-radius: 15px;
-  border: 1px solid rgba(56,189,248,0.2);
-  margin-bottom: 30px;
-}
-
-h1 { color: #38bdf8; font-size: 2.3rem; }
-
-.progress-bar {
-  height: 20px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 10px;
-  overflow: hidden;
-  margin-top: 15px;
-}
-
-.progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #38bdf8, #22d3ee);
-  transition: width 0.3s;
-}
-
-.section {
-  background: rgba(0,0,0,0.85);
-  padding: 25px;
-  border-radius: 15px;
-  border: 1px solid rgba(56,189,248,0.2);
-  margin-bottom: 25px;
-}
-
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid rgba(56,189,248,0.3);
-  padding-bottom: 10px;
-  margin-bottom: 15px;
-}
-
-h2 { color: #22d3ee; font-size: 1.3rem; }
-
-.section-progress-bar {
-  width: 120px;
-  height: 8px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.section-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg,#22d3ee,#38bdf8);
-}
-
-.problem-list {
-  display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(300px,1fr));
-  gap: 12px;
-}
-
-.problem-item {
-  display: flex;
-  align-items: center;
-  padding: 10px;
-  background: rgba(20,20,20,0.7);
-  border-radius: 8px;
-}
-
-.problem-item.completed {
-  background: rgba(34,197,94,0.15);
-}
-
-input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.problem-link {
-  color: #e5e7eb;
-  text-decoration: none;
-}
-
-.problem-link:hover {
-  color: #38bdf8;
-  text-decoration: underline;
-}
-
-.stats {
-  display: grid;
-  grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-  gap: 15px;
-  margin-bottom: 25px;
-}
-
-.stat {
-  background: rgba(0,0,0,0.85);
-  padding: 15px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid rgba(56,189,248,0.2);
-}
-
-.stat span {
-  font-size: 1.8rem;
-  color: #38bdf8;
+@media(max-width:768px){
+  body{padding:20px 16px}
+  h1{font-size:1.5rem}
+  .problem-list{grid-template-columns:1fr}
+  .section-header{flex-direction:column;align-items:flex-start;gap:12px}
+  .section-meta{width:100%;justify-content:space-between}
 }
 </style>
 </head>
@@ -134,11 +174,11 @@ input[type="checkbox"] {
 <div class="container">
 
 <header>
-  <h1>🎯 DP + Graph (200 Problems) Tracker</h1>
+  <h1>DP + Graph Problems Tracker</h1>
   <div class="progress-bar">
     <div class="progress-fill" id="overallProgress"></div>
   </div>
-  <p id="overallText"></p>
+  <p class="overall-text" id="overallText"></p>
 </header>
 
 <div class="stats" id="stats"></div>
@@ -147,45 +187,147 @@ input[type="checkbox"] {
 </div>
 
 <script>
-function slugify(name) {
-  return name
-    .toLowerCase()
-    .replace(/[^a-z0-9\s-]/g, '')   // remove special chars
-    .replace(/\s+/g, '-')           // spaces → -
-    .replace(/-+/g, '-');           // clean --
+function slugify(name){
+  return name.toLowerCase()
+    .replace(/[^a-z0-9\s-]/g,'')
+    .replace(/\s+/g,'-')
+    .replace(/-+/g,'-');
 }
-
-function leetcodeLink(name) {
-  return "https://leetcode.com/problems/" + slugify(name) + "/";
+function leetcodeLink(name){
+  return "https://leetcode.com/problems/"+slugify(name)+"/";
 }
 
 const data = {
-  "DP Basics (1D)": [
-    "Climbing Stairs","Fibonacci Number","Min Cost Climbing Stairs",
-    "House Robber","House Robber II","House Robber III","Decode Ways",
-    "Paint Fence","Nth Tribonacci Number","Counting Bits",
-    "Divisor Game","Integer Break","Maximum Subarray",
-    "Maximum Product Subarray","Partition Array for Max Sum"
-  ],
-  "Knapsack / Subset DP": [
-    "Coin Change","Coin Change II","Partition Equal Subset Sum",
-    "Target Sum","Ones and Zeroes","Last Stone Weight II",
-    "Perfect Squares","Combination Sum IV","Can I Win",
-    "Minimum Cost For Tickets","Shopping Offers",
-    "Profitable Schemes","Tallest Billboard","Dice Roll Simulation",
-    "Subset Sum (Classic)"
-  ],
-  "Graph Basics & Traversal": [
-    "Number of Islands","Max Area of Island","Flood Fill",
-    "Island Perimeter","Keys and Rooms","Count Sub Islands",
-    "Number of Enclaves","Closed Island","Surrounded Regions",
-    "Find if Path Exists","All Paths From Source to Target",
-    "Clone Graph","Graph Valid Tree",
-    "Find the Town Judge","Reorder Routes to Make All Paths Lead to Zero"
-  ]
+
+"DP Basics (1D) – 15":[
+"Climbing Stairs","Fibonacci Number","Min Cost Climbing Stairs",
+"House Robber","House Robber II","House Robber III","Decode Ways",
+"Paint Fence","Nth Tribonacci Number","Counting Bits",
+"Divisor Game","Integer Break","Maximum Subarray",
+"Maximum Product Subarray","Partition Array for Max Sum"
+],
+
+"Knapsack / Subset DP – 15":[
+"Coin Change","Coin Change II","Partition Equal Subset Sum",
+"Target Sum","Ones and Zeroes","Last Stone Weight II",
+"Perfect Squares","Combination Sum IV","Can I Win",
+"Minimum Cost For Tickets","Shopping Offers",
+"Profitable Schemes","Tallest Billboard","Dice Roll Simulation",
+"Subset Sum"
+],
+
+"LIS & Subsequence DP – 10":[
+"Longest Increasing Subsequence","Number of LIS",
+"Russian Doll Envelopes","Longest Arithmetic Subsequence",
+"Longest Fibonacci Subsequence","Wiggle Subsequence",
+"Maximum Length of Pair Chain","Increasing Triplet Subsequence",
+"Largest Divisible Subset","Longest Bitonic Subsequence"
+],
+
+"String DP – 15":[
+"Longest Common Subsequence","Edit Distance","Distinct Subsequences",
+"Interleaving String","Regular Expression Matching",
+"Wildcard Matching","Longest Palindromic Subsequence",
+"Longest Palindromic Substring","Palindromic Substrings",
+"Delete Operation for Two Strings","Word Break",
+"Word Break II","Scramble String",
+"Shortest Common Supersequence","Count Different Palindromic Subsequences"
+],
+
+"Grid / Matrix DP – 15":[
+"Unique Paths","Unique Paths II","Minimum Path Sum","Dungeon Game",
+"Maximal Square","Maximal Rectangle","Triangle",
+"Falling Path Sum","Falling Path Sum II","Cherry Pickup",
+"Cherry Pickup II","Out of Boundary Paths",
+"Count Square Submatrices","Minimum Falling Path Sum",
+"Knight Probability in Chessboard"
+],
+
+"Interval / Hard DP – 15":[
+"Burst Balloons","Stone Game","Stone Game II","Stone Game III",
+"Strange Printer","Remove Boxes","Predict the Winner",
+"Optimal BST","Minimum Cost Tree From Leaf Values",
+"Allocate Mailboxes","Merge Stones","Super Egg Drop",
+"Frog Jump","Partition to K Equal Sum Subsets",
+"Maximum Students Taking Exam"
+],
+
+"Graph Basics & Traversal – 15":[
+"Number of Islands","Max Area of Island","Flood Fill",
+"Island Perimeter","Keys and Rooms","Count Sub Islands",
+"Number of Enclaves","Closed Island","Surrounded Regions",
+"Find if Path Exists","All Paths From Source to Target",
+"Clone Graph","Graph Valid Tree",
+"Find the Town Judge","Reorder Routes to Make All Paths Lead to Zero"
+],
+
+"BFS / DFS – 15":[
+"Rotting Oranges","Shortest Path in Binary Matrix",
+"Walls and Gates","Open the Lock","Word Ladder",
+"Word Ladder II","Pacific Atlantic Water Flow",
+"Nearest Exit from Entrance","Minimum Depth of Binary Tree",
+"As Far From Land as Possible","Bus Routes",
+"Jump Game III","Shortest Bridge",
+"Sliding Puzzle","Minimum Moves to Spread Stones"
+],
+
+"Union Find (DSU) – 15":[
+"Number of Provinces","Accounts Merge","Redundant Connection",
+"Redundant Connection II","Similar String Groups",
+"Smallest String With Swaps","Graph Connectivity With Threshold",
+"Most Stones Removed","Satisfiability of Equality Equations",
+"Minimize Malware Spread","Couples Holding Hands",
+"Regions Cut By Slashes","Sentence Similarity II",
+"Lexicographically Smallest Equivalent String",
+"Number of Operations to Make Network Connected"
+],
+
+"Topological Sort (DAG) – 15":[
+"Course Schedule","Course Schedule II","Alien Dictionary",
+"Find Eventual Safe States","Minimum Height Trees",
+"Sort Items by Groups Respecting Dependencies",
+"Parallel Courses","Parallel Courses II","Parallel Courses III",
+"Longest Increasing Path in Matrix",
+"Build a Matrix With Conditions","Sequence Reconstruction",
+"Largest Color Value in Directed Graph",
+"Maximum Employees to Be Invited",
+"Number of Ways to Arrive at Destination"
+],
+
+"Shortest Path Algorithms – 15":[
+"Network Delay Time","Path With Minimum Effort",
+"Cheapest Flights Within K Stops","Path With Maximum Probability",
+"Shortest Path Visiting All Nodes",
+"Minimum Cost to Make at Least One Valid Path",
+"Reachable Nodes In Subdivided Graph",
+"Swim in Rising Water","Shortest Path in Hidden Grid",
+"Minimum Obstacle Removal","Second Minimum Time to Reach Destination",
+"Minimum Cost Grid","Time Needed to Inform All Employees",
+"Find the City With Smallest Neighbors",
+"Minimum Time to Visit a Cell"
+],
+
+"MST / Advanced / Hard Graph – 25":[
+"Min Cost to Connect All Points","Optimize Water Distribution",
+"Critical Connections in a Network","Reconstruct Itinerary",
+"Valid Arrangement of Pairs","Evaluate Division",
+"Detonate the Maximum Bombs","Longest Cycle in a Graph",
+"Cat and Mouse","Frog Jump",
+"Shortest Path Visiting All Nodes","Maximum Number of Fish in Grid",
+"Count Unreachable Pairs","Minimum Degree of a Connected Trio",
+"Find All People With Secret","Time to Cross a Bridge",
+"Escape the Spreading Fire","Maximum Path Quality of Graph",
+"Minimum Fuel Cost to Report Capital",
+"Minimum Number of Vertices to Reach All Nodes",
+"Count Subgraphs With Max Degree","Number of Restricted Paths",
+"Shortest Distance From All Buildings",
+"Reachable Nodes With Restrictions",
+"Longest Path in DAG"
+]
+
 };
 
-let total=0, done=0;
+let total=0,done=0;
 const container=document.getElementById("content");
 
 Object.entries(data).forEach(([section,problems])=>{
@@ -198,14 +340,23 @@ Object.entries(data).forEach(([section,problems])=>{
   const h2=document.createElement("h2");
   h2.textContent=section;
 
+  const meta=document.createElement("div");
+  meta.className="section-meta";
+
+  const count=document.createElement("span");
+  count.className="section-count";
+  
   const bar=document.createElement("div");
   bar.className="section-progress-bar";
   const fill=document.createElement("div");
   fill.className="section-progress-fill";
   bar.appendChild(fill);
 
+  meta.appendChild(count);
+  meta.appendChild(bar);
+
   header.appendChild(h2);
-  header.appendChild(bar);
+  header.appendChild(meta);
   sec.appendChild(header);
 
   const list=document.createElement("div");
@@ -224,13 +375,13 @@ Object.entries(data).forEach(([section,problems])=>{
     cb.type="checkbox";
     cb.checked=localStorage.getItem(key)==="true";
 
-    if(cb.checked){ done++; sectionDone++; item.classList.add("completed"); }
+    if(cb.checked){done++;sectionDone++;item.classList.add("completed");}
 
     cb.onchange=()=>{
       localStorage.setItem(key,cb.checked);
-      cb.checked ? (done++,sectionDone++,item.classList.add("completed"))
-                 : (done--,sectionDone--,item.classList.remove("completed"));
-      update();
+      cb.checked?(done++,sectionDone++,item.classList.add("completed"))
+                :(done--,sectionDone--,item.classList.remove("completed"));
+      updateProgress();
     };
 
     const a=document.createElement("a");
@@ -244,22 +395,48 @@ Object.entries(data).forEach(([section,problems])=>{
     list.appendChild(item);
   });
 
+  count.textContent=`${sectionDone}/${problems.length}`;
   fill.style.width=(sectionDone/problems.length*100)+"%";
   sec.appendChild(list);
   container.appendChild(sec);
 });
 
-function update(){
+function updateProgress(){
+  const sections=document.querySelectorAll('.section');
+  sections.forEach((sec,idx)=>{
+    const sectionName=Object.keys(data)[idx];
+    const problems=data[sectionName];
+    let sectionDone=0;
+    
+    problems.forEach(p=>{
+      const key=sectionName+"::"+p;
+      if(localStorage.getItem(key)==="true")sectionDone++;
+    });
+    
+    const count=sec.querySelector('.section-count');
+    const fill=sec.querySelector('.section-progress-fill');
+    count.textContent=`${sectionDone}/${problems.length}`;
+    fill.style.width=(sectionDone/problems.length*100)+"%";
+  });
+
   document.getElementById("overallProgress").style.width=(done/total*100)+"%";
-  document.getElementById("overallText").textContent=`Completed ${done} / ${total}`;
+  document.getElementById("overallText").textContent=`${done} of ${total} problems completed`;
   document.getElementById("stats").innerHTML=`
-    <div class="stat"><span>${done}</span><br>Completed</div>
-    <div class="stat"><span>${total-done}</span><br>Remaining</div>
-    <div class="stat"><span>${Math.round(done/total*100)}%</span><br>Progress</div>
+    <div class="stat">
+      <span class="stat-value">${done}</span>
+      <span class="stat-label">Completed</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">${total-done}</span>
+      <span class="stat-label">Remaining</span>
+    </div>
+    <div class="stat">
+      <span class="stat-value">${Math.round(done/total*100)}%</span>
+      <span class="stat-label">Progress</span>
+    </div>
   `;
 }
-
-update();
+updateProgress();
 </script>
 </body>
 </html>
